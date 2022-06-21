@@ -5,7 +5,10 @@ public class StudentList {
 	public static void main(String[] args) {
 
 //		Check arguments
-		if(args[0].equals("a")) {
+		if(args.length == 0){
+			System.out.println("You didn't any data.\nPlease enter a dada.");
+		}
+		else if(args[0].equals("a")) {
 			System.out.println("Loading data ...");			
 			try {
 				BufferedReader bufferedReader = new BufferedReader(
@@ -13,7 +16,7 @@ public class StudentList {
 							new FileInputStream("students.txt"))); 
 				String studentNameLine = bufferedReader.readLine();
 				String i[] = studentNameLine.split(", ");
-				for(String student : studentNames) {
+				for(String student : i) {
 					System.out.println(student);
 				}
 			} catch (Exception e){
@@ -107,6 +110,9 @@ public class StudentList {
 
 			}
 			System.out.println("Data Loaded.");				
+		}
+		else {
+			System.out.println("You didn't correct input dada.\nPlease enter correct data.");
 		}
 	}
 }
