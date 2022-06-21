@@ -11,12 +11,10 @@ public class StudentList {
 		else if(args[0].equals(Constants.showAll)) {
 			System.out.println(Constants.loadingMessage);
 			try {
-				BufferedReader bufferedReader = new BufferedReader(
-					new InputStreamReader(
-							new FileInputStream(Constants.studentList)));
-				String studentNameLine = bufferedReader.readLine();
-				String i[] = studentNameLine.split(Constants.studentEntryDeliaiter);
-				for(String student : i) {
+
+				String studentNameLine = getString();
+				String studentNames[] = studentNameLine.split(Constants.studentEntryDeliaiter);
+				for(String student : studentNames) {
 					System.out.println(student);
 				}
 			} catch (Exception e){
@@ -28,15 +26,12 @@ public class StudentList {
 		{
 			System.out.println(Constants.loadingMessage);
 			try {
-				BufferedReader bufferedReader = new BufferedReader(
-					new InputStreamReader(
-							new FileInputStream(Constants.studentList)));
-				String studentNameLine = bufferedReader.readLine();
+				String studentNameLine = getString();
 				//System.out.println(studentNameLine);
-				String i[] = studentNameLine.split(Constants.studentEntryDeliaiter);
+				String studentNames[] = studentNameLine.split(Constants.studentEntryDeliaiter);
 				Random Rand = new Random();
-				int y = ( (Math.abs( Rand.nextInt() ) % 2 ) *2 ) % 3;
-					System.out.println(i[y]);
+				int randomStudent = ( (Math.abs( Rand.nextInt() ) % 2 ) *2 ) % 3;
+					System.out.println(studentNames[randomStudent]);
 			} catch (Exception e){
 
 			}
@@ -64,15 +59,12 @@ public class StudentList {
 		{
 			System.out.println(Constants.loadingMessage);
 			try {
-				BufferedReader bufferedReader = new BufferedReader(
-					new InputStreamReader(
-							new FileInputStream(Constants.studentList)));
-				String studentNameLine = bufferedReader.readLine();
-				String i[] = studentNameLine.split(Constants.studentEntryDeliaiter);
+				String studentNameLine = getString();
+				String studentNames[] = studentNameLine.split(Constants.studentEntryDeliaiter);
 				boolean done = false;
 				String studentName = args[0].substring(1);
-				for(int idx = 0; idx<i.length && !done; idx++) {
-				if(i[idx].equals(studentName)) {
+				for(int idx = 0; idx < studentNames.length && !done; idx++) {
+				if(studentNames[idx].equals(studentName)) {
 					System.out.println(Constants.dataFoundMessage);
 						done = true;
 				}
@@ -86,10 +78,7 @@ public class StudentList {
 		{
 			System.out.println(Constants.loadingMessage);
 			try {
-				BufferedReader bufferedReader = new BufferedReader(
-					new InputStreamReader(
-							new FileInputStream(Constants.studentList)));
-				String studentNameLine = bufferedReader.readLine();
+				String studentNameLine = getString();
 				char studentNameTOChar[] = studentNameLine.toCharArray();
 				boolean in_word = false;
 				int count = 0;
@@ -114,5 +103,13 @@ public class StudentList {
 		else {
 			System.out.println(Constants.wrongInputMessage);
 		}
+	}
+
+	private static String getString() throws IOException {
+		BufferedReader bufferedReader = new BufferedReader(
+				new InputStreamReader(
+						new FileInputStream(Constants.studentList)));
+		String studentNamesLine = bufferedReader.readLine();
+		return studentNamesLine;
 	}
 }
