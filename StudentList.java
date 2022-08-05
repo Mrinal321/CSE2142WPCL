@@ -56,12 +56,10 @@ public class StudentList {
 			try {
 
 				String studentNames[] = getString().split(Constants.studentEntryDeliaiter);
-				boolean done = false;
-				String studentName = args[0].substring(1);
-				for(int idx = 0; idx < studentNames.length && !done; idx++) {
-				if(studentNames[idx].equals(studentName)) {
+				
+				for(int idx = 0; idx < studentNames.length; idx++) {
+				if(studentNames[idx].equals(args[0].substring(1))) {
 					System.out.println(Constants.dataFoundMessage);
-						done = true;
 				}
 			}
 			} catch (Exception e){
