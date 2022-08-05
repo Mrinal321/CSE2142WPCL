@@ -56,7 +56,7 @@ public class StudentList {
 			try {
 
 				String studentNames[] = getString().split(Constants.studentEntryDeliaiter);
-				
+
 				for(int idx = 0; idx < studentNames.length; idx++) {
 				if(studentNames[idx].equals(args[0].substring(1))) {
 					System.out.println(Constants.dataFoundMessage);
@@ -73,20 +73,14 @@ public class StudentList {
 			try {
 
 				char studentNameTOChar[] = getString().toCharArray();
-				boolean in_word = false;
+				
 				int count = 0;
 				for(char nameChar : studentNameTOChar) {
-					if(nameChar ==' ')
-					{
-						if (!in_word) {
-							count++;
-							in_word = true;
-						}
-						else {
-							in_word = false;
-						}
+					if(nameChar ==' ') {
+						count++;
+					}
 				}
-			}
+				count = (count+1)/2;
 			System.out.println(count + Constants.dataFoundMessage);
 			} catch (Exception e){
 
