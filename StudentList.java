@@ -12,8 +12,7 @@ public class StudentList {
 			System.out.println(Constants.loadingMessage);
 			try {
 
-				String studentNameLine = getString();
-				String studentNames[] = studentNameLine.split(Constants.studentEntryDeliaiter);
+				String studentNames[] = getString().split(Constants.studentEntryDeliaiter);
 				for(String student : studentNames) {
 					System.out.println(student);
 				}
@@ -26,11 +25,9 @@ public class StudentList {
 		{
 			System.out.println(Constants.loadingMessage);
 			try {
-				String studentNameLine = getString();
-				//System.out.println(studentNameLine);
-				String studentNames[] = studentNameLine.split(Constants.studentEntryDeliaiter);
-				Random Rand = new Random();
-				int randomStudent = ( (Math.abs( Rand.nextInt() ) % 2 ) *2 ) % 3;
+
+				String studentNames[] = getString().split(Constants.studentEntryDeliaiter);
+				int randomStudent = ( (Math.abs( (new Random()).nextInt() ) % 2 ) *2 ) % 3;
 					System.out.println(studentNames[randomStudent]);
 			} catch (Exception e){
 
@@ -40,14 +37,12 @@ public class StudentList {
 		else if(args[0].contains(Constants.addEntry)){
 			System.out.println(Constants.loadingMessage);
 			try {
+
 				BufferedWriter bufferedWriter = new BufferedWriter(
 					new FileWriter(Constants.studentList, true));
-				String studentNameLine = args[0].substring(1);
-	        	Date dataformet = new Date();
-	        	String df = Constants.dateFormate;
-	        	DateFormat dateFormat = new SimpleDateFormat(df);
-	        	String updateData= dateFormat.format(dataformet);
-				bufferedWriter.write(Constants.studentEntryDeliaiter + studentNameLine + Constants.lastUpdateMessage + updateData);
+
+	        	DateFormat dateFormat = new SimpleDateFormat(Constants.dateFormate);
+				bufferedWriter.write(Constants.studentEntryDeliaiter + args[0].substring(1) + Constants.lastUpdateMessage + dateFormat.format(new Date()));
 				bufferedWriter.close();
 			} catch (Exception e){
 
@@ -59,8 +54,8 @@ public class StudentList {
 		{
 			System.out.println(Constants.loadingMessage);
 			try {
-				String studentNameLine = getString();
-				String studentNames[] = studentNameLine.split(Constants.studentEntryDeliaiter);
+
+				String studentNames[] = getString().split(Constants.studentEntryDeliaiter);
 				boolean done = false;
 				String studentName = args[0].substring(1);
 				for(int idx = 0; idx < studentNames.length && !done; idx++) {
@@ -78,8 +73,8 @@ public class StudentList {
 		{
 			System.out.println(Constants.loadingMessage);
 			try {
-				String studentNameLine = getString();
-				char studentNameTOChar[] = studentNameLine.toCharArray();
+
+				char studentNameTOChar[] = getString().toCharArray();
 				boolean in_word = false;
 				int count = 0;
 				for(char nameChar : studentNameTOChar) {
@@ -109,7 +104,6 @@ public class StudentList {
 		BufferedReader bufferedReader = new BufferedReader(
 				new InputStreamReader(
 						new FileInputStream(Constants.studentList)));
-		String studentNamesLine = bufferedReader.readLine();
-		return studentNamesLine;
+		return bufferedReader.readLine();
 	}
 }
